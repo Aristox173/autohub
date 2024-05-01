@@ -1,4 +1,5 @@
 import "../../styles/sidebar.scss"
+import DayNightToggle from "../components/DayNightToggle";
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import CarRepairOutlinedIcon from '@mui/icons-material/CarRepairOutlined';
 import HomeRepairServiceOutlinedIcon from '@mui/icons-material/HomeRepairServiceOutlined';
@@ -12,6 +13,7 @@ import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+
 
 const Sidebar = () => {
   return (
@@ -83,7 +85,7 @@ const Sidebar = () => {
         </div>
         <hr />
         <div className="bottom">
-            
+            <DayNightToggle />
         </div>
     </div>
   )
