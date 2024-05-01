@@ -1,5 +1,11 @@
+import Home from "./views/components/Home";
+
 function App() {
-  return <div className="App">Hola</div>;
+  return (
+    <div className="App">
+      <Home />
+    </div>
+  );
 }
 
 export default App;
