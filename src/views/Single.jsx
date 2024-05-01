@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/single.scss"
+import "../styles/single.scss"
 
 function Single() {
   return (
