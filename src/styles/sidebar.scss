@@ -44,20 +44,65 @@
                 padding: 7px;
                 cursor: pointer;
 
-                &:hover {
-                    background-color: rgb(219, 255, 251);
-                }
-
                 .icon {
                     font-size: 18px;
                     color: rgb(71, 196, 184);
                 }
 
-                span {
+                button {
+                    width: 10em;
+                    position: relative;
+                    height: auto;
+                    padding: 2%;
+                    margin: auto;
+                    border: 3px ridge rgb(71, 196, 184);
+                    outline: none;
+                    background-color: transparent;
+                    color: #888;
+                    transition: 1s;
+                    border-radius: 0.3em;
                     font-size: 13px;
                     font-weight: 600;
-                    color: #888;
-                    margin-left: 10px;
+                    cursor: pointer;
+
+                    span{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                button::after {
+                    content: "";
+                    position: absolute;
+                    top: -10px;
+                    left: 3%;
+                    width: 95%;
+                    height: 40%;
+                    background-color: #fff;
+                    transition: 0.5s;
+                    transform-origin: center;
+                }
+                  
+                  button::before {
+                    content: "";
+                    transform-origin: center;
+                    position: absolute;
+                    top: 80%;
+                    left: 3%;
+                    width: 95%;
+                    height: 40%;
+                    background-color: #fff;
+                    transition: 0.5s;
+                }
+                  
+                  button:hover::before, button:hover::after {
+                    transform: scale(0)
+                }
+                  
+                  button:hover {
+                    box-shadow: inset 0px 0px 25px rgb(145, 238, 229);
                 }
             }
         }

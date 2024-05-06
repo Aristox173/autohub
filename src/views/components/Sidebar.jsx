@@ -14,7 +14,6 @@ import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutl
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
-
 const Sidebar = () => {
   return (
     <div className="sidebar">
@@ -26,60 +25,39 @@ const Sidebar = () => {
             <ul>
                 <p className="title">MAIN</p>
                 <li>
-                    <DashboardCustomizeOutlinedIcon className="icon"/>
-                    <span>Dashboard</span>
+                    
+                    <button><span><DashboardCustomizeOutlinedIcon className="icon"/>Dashboard</span></button>
                 </li>
                 <p className="title">LISTS</p>
                 <li>
-                    <CarRepairOutlinedIcon className="icon"/>
-                    <span>Suppliers</span>
+                    <button><span><CarRepairOutlinedIcon className="icon"/>Suppliers</span></button>
                 </li>
                 <li>
-                    <HomeRepairServiceOutlinedIcon className="icon"/>
-                    <span>Mechanics</span>
+                    <button><span><HomeRepairServiceOutlinedIcon className="icon"/>Mechanics</span></button>
                 </li>
                 <li>
-                    <StorefrontOutlinedIcon className="icon"/>
-                    <span>Products</span>
+                    <button><span><StorefrontOutlinedIcon className="icon"/>Products</span></button>
                 </li>
                 <li>
-                    <AddCardOutlinedIcon className="icon"/>
-                    <span>Orders</span>
+                    <button><span><AddCardOutlinedIcon className="icon"/>Orders</span></button>
                 </li>
                 <li>
-                    <LocalShippingOutlinedIcon className="icon"/>
-                    <span>Delivery</span>
+                    <button><span><LocalShippingOutlinedIcon className="icon"/>Delivery</span></button>
                 </li>
                 <p className="title">USEFUL</p>
                 <li>
-                    <AnalyticsOutlinedIcon className="icon"/>
-                    <span>Stats</span>
+                    <button><span><AnalyticsOutlinedIcon className="icon"/>Stats</span></button>
                 </li>
-                <li>
-                    <NotificationsActiveOutlinedIcon className="icon"/>
-                    <span>Notifications</span>
-                </li>
-                <p className="title">SERVICE</p>
-                <li>
-                    <SystemSecurityUpdateGoodOutlinedIcon className="icon"/>
-                    <span>System Health</span>
-                </li>
-                <li>
-                    <BookOutlinedIcon className="icon"/>
-                    <span>Logs</span>
-                </li>
-                <li>
-                    <SettingsSuggestOutlinedIcon className="icon"/>
-                    <span>Settings</span>
-                </li>
+
                 <p className="title">USER</p>
                 <li>
-                    <AccountBoxOutlinedIcon className="icon"/>
-                    <span>Profile</span>
+                    <button><span><AccountBoxOutlinedIcon className="icon"/>Profile</span></button>
                 </li>
                 <li>
-                    <ExitToAppOutlinedIcon className="icon"/>
-                    <span>Logout</span>
+                    <button><span><SettingsSuggestOutlinedIcon className="icon"/>Settings</span></button>
+                </li>
+                <li>
+                    <button><span><ExitToAppOutlinedIcon className="icon"/>Logout</span></button>
                 </li>
             </ul>
         </div>
