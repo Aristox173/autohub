@@ -6,6 +6,7 @@ import New from "./views/New";
 import { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
+import { mechanicInputs, productInputs, supplierInputs } from "./formSource";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -49,7 +50,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New />
+                    <New inputs={supplierInputs} title="Add New Supplier" />
                   </RequireAuth>
                 }
               />
@@ -75,7 +76,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New />
+                    <New inputs={mechanicInputs} title="Add New Mechanic" />
                   </RequireAuth>
                 }
               />
@@ -101,7 +102,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New />
+                    <New inputs={productInputs} title="Add New Product" />
                   </RequireAuth>
                 }
               />
