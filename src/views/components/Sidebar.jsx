@@ -1,5 +1,4 @@
 import "../../styles/sidebar.scss";
-import DayNightToggle from "../components/DayNightToggle";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import CarRepairOutlinedIcon from "@mui/icons-material/CarRepairOutlined";
 import HomeRepairServiceOutlinedIcon from "@mui/icons-material/HomeRepairServiceOutlined";
@@ -11,8 +10,40 @@ import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutl
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { AuthContext } from "../../context/AuthContext.js";
+import { useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signOut(auth); // Sign out using Firebase auth
+
+      // Update the state to logout the user
+      dispatch({ type: "LOGOUT" });
+
+      // Redirect to the login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  /*useEffect(() => {
+    if (location.pathname === "") {
+      console.log("You are on the login page.");
+    } else {
+    }
+  }, [location.pathname]);*/
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -118,7 +149,7 @@ const Sidebar = () => {
             </button>
           </li>
           <li>
-            <button>
+            <button onClick={handleLogout}>
               <span>
                 <ExitToAppOutlinedIcon className="icon" />
                 Logout
@@ -128,9 +159,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <hr />
-      <div className="bottom">
-        <DayNightToggle />
-      </div>
+      <div className="bottom"></div>
     </div>
   );
 };
