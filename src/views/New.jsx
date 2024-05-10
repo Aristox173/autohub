@@ -4,26 +4,43 @@ import Navbar from "../views/components/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import {
-  addDoc,
   collection,
+  getDocs,
   doc,
   serverTimestamp,
   setDoc,
+  addDoc,
 } from "firebase/firestore";
 import { auth, db, storage } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
-const New = ({ inputs, title }) => {
+const New = ({ inputs, title, dbModel }) => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
   const [per, setPer] = useState(null);
+  const [supplierNames, setSupplierNames] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchSupplierNames = async () => {
+      if (dbModel === "products") {
+        const supplierCollectionRef = collection(db, "suppliers");
+        const supplierSnapshot = await getDocs(supplierCollectionRef);
+        const names = supplierSnapshot.docs.map(
+          (doc) => doc.data().supplierName
+        );
+        setSupplierNames(names);
+      }
+    };
+
+    fetchSupplierNames();
+  }, [dbModel]);
+
+  useEffect(() => {
     const uploadFile = () => {
-      const name = new Date().getTime() + file.name;
+      //const name = new Date().getTime() + file.name;
       const storageRef = ref(storage, file.name);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -69,15 +86,37 @@ const New = ({ inputs, title }) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        data.supplierEmail,
-        data.supplierPassword
-      );
-      await setDoc(doc(db, "suppliers", res.user.uid), {
-        ...data,
-        timeStamp: serverTimestamp(),
-      });
+      if (dbModel === "suppliers") {
+        const res = await createUserWithEmailAndPassword(
+          auth,
+          data.supplierEmail,
+          data.supplierPassword
+        );
+        await setDoc(doc(db, "suppliers", res.user.uid), {
+          ...data,
+          timeStamp: serverTimestamp(),
+        });
+      }
+      if (dbModel === "mechanics") {
+        const res = await createUserWithEmailAndPassword(
+          auth,
+          data.mechanicEmail,
+          data.mechanicPassword
+        );
+        await setDoc(doc(db, "mechanics", res.user.uid), {
+          ...data,
+          timeStamp: serverTimestamp(),
+        });
+      }
+
+      if (dbModel === "products") {
+        const productsCollectionRef = collection(db, "products"); // Reference to the "products" collection
+        await addDoc(productsCollectionRef, {
+          ...data,
+          timeStamp: serverTimestamp(),
+        });
+      }
+
       navigate(-1);
     } catch (err) {
       console.log(err);
@@ -128,7 +167,7 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <button disabled={per !== null && per < 100} type="submit">
-                Create Supplier
+                Create
               </button>
             </form>
           </div>

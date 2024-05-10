@@ -37,13 +37,6 @@ const Sidebar = () => {
     }
   };
 
-  /*useEffect(() => {
-    if (location.pathname === "") {
-      console.log("You are on the login page.");
-    } else {
-    }
-  }, [location.pathname]);*/
-
   return (
     <div className="sidebar">
       <div className="top">

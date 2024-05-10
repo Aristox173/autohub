@@ -1,19 +1,20 @@
 import "../../styles/datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { supplierColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
-const Datatable = () => {
+const Datatable = ({ columns, title }) => {
   const [data, setData] = useState([]);
+  const dbModel = title.toLowerCase();
+  console.log(dbModel);
 
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db, "suppliers"));
+        const querySnapshot = await getDocs(collection(db, dbModel));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
@@ -24,13 +25,13 @@ const Datatable = () => {
       }
     };
     fetchData();
-  }, []);
+  });
 
-  console.log(data);
+  //console.log(data);
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "suppliers", id));
+      await deleteDoc(doc(db, dbModel, id));
       setData(data.filter((item) => item.id !== id));
     } catch (err) {
       console.log(err);
@@ -41,11 +42,11 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="viewButton">View</div>
+            <div className="editButton">Edit</div>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -60,10 +61,17 @@ const Datatable = () => {
 
   return (
     <div className="datatable">
+      <div className="datatableTitle">
+        {title}
+        <Link to={`/${title.toLowerCase()}/new`} className="link">
+          Add New
+        </Link>
+      </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={supplierColumns.concat(actionColumn)}
+        rowHeight={50}
+        columns={columns.concat(actionColumn)}
         pageSize={10}
         rowsPerPageOptions={[10]}
         checkboxSelection

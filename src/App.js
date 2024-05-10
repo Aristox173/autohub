@@ -7,6 +7,11 @@ import { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { mechanicInputs, productInputs, supplierInputs } from "./formSource";
+import {
+  supplierColumns,
+  mechanicColumns,
+  productColumns,
+} from "./datatablesource";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -34,7 +39,7 @@ function App() {
                 index
                 element={
                   <RequireAuth>
-                    <List />
+                    <List columns={supplierColumns} title="SUPPLIERS" />
                   </RequireAuth>
                 }
               />
@@ -50,7 +55,11 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={supplierInputs} title="Add New Supplier" />
+                    <New
+                      inputs={supplierInputs}
+                      title="Add New Supplier"
+                      dbModel="suppliers"
+                    />
                   </RequireAuth>
                 }
               />
@@ -60,7 +69,7 @@ function App() {
                 index
                 element={
                   <RequireAuth>
-                    <List />
+                    <List columns={mechanicColumns} title="MECHANICS" />
                   </RequireAuth>
                 }
               />
@@ -76,7 +85,11 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={mechanicInputs} title="Add New Mechanic" />
+                    <New
+                      inputs={mechanicInputs}
+                      title="Add New Mechanic"
+                      dbModel="mechanics"
+                    />
                   </RequireAuth>
                 }
               />
@@ -86,7 +99,7 @@ function App() {
                 index
                 element={
                   <RequireAuth>
-                    <List />
+                    <List columns={productColumns} title="PRODUCTS" />
                   </RequireAuth>
                 }
               />
@@ -102,7 +115,11 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={productInputs} title="Add New Product" />
+                    <New
+                      inputs={productInputs}
+                      title="Add New Product"
+                      dbModel="products"
+                    />
                   </RequireAuth>
                 }
               />

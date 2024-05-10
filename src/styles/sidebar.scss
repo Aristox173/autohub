@@ -65,7 +65,7 @@
                     font-weight: 600;
                     cursor: pointer;
 
-                    span{
+                    span {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -84,8 +84,8 @@
                     transition: 0.5s;
                     transform-origin: center;
                 }
-                  
-                  button::before {
+
+                button::before {
                     content: "";
                     transform-origin: center;
                     position: absolute;
@@ -96,18 +96,19 @@
                     background-color: #fff;
                     transition: 0.5s;
                 }
-                  
-                  button:hover::before, button:hover::after {
-                    transform: scale(0)
+
+                button:hover::before,
+                button:hover::after {
+                    transform: scale(0);
                 }
-                  
-                  button:hover {
+
+                button:hover {
                     box-shadow: inset 0px 0px 25px rgb(145, 238, 229);
                 }
             }
         }
     }
-    
+
     .bottom {
         height: 90px;
         display: flex;
