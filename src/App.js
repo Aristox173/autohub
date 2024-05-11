@@ -5,7 +5,7 @@ import Single from "./views/Single";
 import New from "./views/New";
 import { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./controllers/context/AuthContext";
 import { mechanicInputs, productInputs, supplierInputs } from "./formSource";
 import {
   supplierColumns,

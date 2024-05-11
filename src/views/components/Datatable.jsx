@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db } from "../../controllers/firebase/firebase";
 
 const Datatable = ({ columns, title }) => {
   const [data, setData] = useState([]);

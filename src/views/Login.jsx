@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import "../styles/login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth } from "../controllers/firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../controllers/context/AuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {

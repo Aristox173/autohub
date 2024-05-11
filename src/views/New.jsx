@@ -11,7 +11,7 @@ import {
   setDoc,
   addDoc,
 } from "firebase/firestore";
-import { auth, db, storage } from "../firebase/firebase";
+import { auth, db, storage } from "../controllers/firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
