@@ -15,6 +15,7 @@ import { auth, db, storage } from "../controllers/firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const New = ({ inputs, title, dbModel }) => {
   const [file, setFile] = useState("");
@@ -85,41 +86,53 @@ const New = ({ inputs, title, dbModel }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+
     try {
+      let userCredential;
+
+      // Determine which collection to use based on dbModel
       if (dbModel === "suppliers") {
-        const res = await createUserWithEmailAndPassword(
+        userCredential = await createUserWithEmailAndPassword(
           auth,
           data.supplierEmail,
           data.supplierPassword
         );
-        await setDoc(doc(db, "suppliers", res.user.uid), {
-          ...data,
-          timeStamp: serverTimestamp(),
-        });
-      }
-      if (dbModel === "mechanics") {
-        const res = await createUserWithEmailAndPassword(
+      } else if (dbModel === "mechanics") {
+        userCredential = await createUserWithEmailAndPassword(
           auth,
           data.mechanicEmail,
           data.mechanicPassword
         );
-        await setDoc(doc(db, "mechanics", res.user.uid), {
+      }
+
+      // Add data to Firestore based on dbModel
+      if (dbModel === "suppliers" || dbModel === "mechanics") {
+        await setDoc(doc(db, dbModel, userCredential.user.uid), {
           ...data,
           timeStamp: serverTimestamp(),
         });
-      }
-
-      if (dbModel === "products") {
-        const productsCollectionRef = collection(db, "products"); // Reference to the "products" collection
+      } else if (dbModel === "products") {
+        const productsCollectionRef = collection(db, "products");
         await addDoc(productsCollectionRef, {
           ...data,
           timeStamp: serverTimestamp(),
         });
       }
 
+      // Show success message using SweetAlert
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // Navigate back
       navigate(-1);
     } catch (err) {
       console.log(err);
+      // Handle any errors here if needed
     }
   };
 

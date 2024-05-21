@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../controllers/firebase/firebase";
+import Swal from "sweetalert2";
 
 const Datatable = ({ columns, title }) => {
   const [data, setData] = useState([]);
@@ -30,11 +31,36 @@ const Datatable = ({ columns, title }) => {
   //console.log(data);
 
   const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, dbModel, id));
-      setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
+    // Show confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+    });
+
+    // If user confirms deletion
+    if (result.isConfirmed) {
+      try {
+        // Attempt to delete the document
+        await deleteDoc(doc(db, dbModel, id));
+
+        // Filter out the deleted item from the data
+        setData(data.filter((item) => item.id !== id));
+
+        // Show success message
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      } catch (err) {
+        console.log(err);
+        // Show error message if deletion fails
+        Swal.fire("Error", "Failed to delete the item.", "error");
+      }
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      // If user cancels the deletion
+      Swal.fire("Cancelled", "Your file is safe :)", "info");
     }
   };
 

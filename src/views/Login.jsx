@@ -5,6 +5,7 @@ import { auth } from "../controllers/firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../controllers/context/AuthContext";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [error, setError] = useState(false);
@@ -61,7 +62,14 @@ const Login = () => {
               Login
             </button>
           </form>
-          <button className="signButton">Sign Up</button>
+          <button className="signButton">
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "#fff" }}
+            >
+              Sign Up
+            </Link>
+          </button>
         </div>
       </div>
     </div>

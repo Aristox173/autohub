@@ -1,0 +1,100 @@
+.registerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0 5%;
+
+    .register {
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px rgb(90, 178, 255);
+        background-color: #caf4ff;
+        margin: 2%;
+
+        .register-top {
+            padding-bottom: 20px;
+            h1 {
+                color: #5ab2ff;
+                font-size: 20px;
+                text-align: center;
+            }
+        }
+
+        .register-bottom {
+            display: flex;
+
+            .register-left {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: 2%;
+
+                img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .register-right {
+                form {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 30px;
+                    justify-content: space-around;
+
+                    .register-formInput {
+                        width: 40%;
+
+                        label {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            margin-bottom: 2%;
+
+                            .icon {
+                                cursor: pointer;
+                            }
+                        }
+
+                        input {
+                            width: 100%;
+                            padding: 5px;
+                            border: 1px solid #ddd;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .register-button {
+            align-items: center;
+            display: flex;
+            justify-content: end;
+            margin-top: 7%;
+
+            button {
+                padding: 10px;
+                background-color: #5ab2ff;
+                color: #fff9d0;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #3e7aae;
+                }
+            }
+        }
+    }
+
+    .register-supplier {
+    }
+
+    .register-mechanic {
+    }
+}

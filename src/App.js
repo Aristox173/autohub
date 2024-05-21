@@ -3,6 +3,7 @@ import Login from "./views/Login";
 import List from "./views/List";
 import Single from "./views/Single";
 import New from "./views/New";
+import Register from "./views/Register";
 import { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./controllers/context/AuthContext";
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route
               index
               element={
